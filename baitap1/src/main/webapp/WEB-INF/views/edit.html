@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa bài hát</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type=text], select, input[type=file] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background-color: #f2b632;
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #e0a920;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Sửa bài hát</h1>
+<form th:action="@{/songs/edit}" th:object="${song}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}"/>
+
+    <label>Tên bài hát:</label>
+    <input type="text" th:field="*{title}" required/>
+
+    <label>Nghệ sĩ:</label>
+    <input type="text" th:field="*{artist}" required/>
+
+    <label>Thể loại:</label>
+    <input type="text" th:field="*{genre}" required/>
+
+    <label>File nhạc (nếu muốn thay đổi):</label>
+    <input type="file" name="file" accept=".mp3,.wav,.ogg,.m4p"/>
+
+    <button type="submit">Cập nhật</button>
+    <a th:href="@{/songs}">Quay lại danh sách</a>
+</form>
+</body>
+</html>

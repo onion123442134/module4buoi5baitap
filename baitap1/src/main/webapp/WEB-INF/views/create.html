@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm bài hát</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type=text], input[type=file] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background-color: #f2b632;
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e0a920;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Thêm bài hát mới</h1>
+
+<form th:action="@{/songs/create}" th:object="${song}" method="post" enctype="multipart/form-data">
+    <label>Tên bài hát:</label>
+    <input type="text" th:field="*{title}" placeholder="Nhập tên bài hát" required/>
+
+    <label>Nghệ sĩ:</label>
+    <input type="text" th:field="*{artist}" placeholder="Nhập tên nghệ sĩ" required/>
+
+    <label>Thể loại:</label>
+    <input type="text" th:field="*{genre}" placeholder="Nhập thể loại" required/>
+
+    <label>File nhạc:</label>
+    <input type="file" name="file" accept=".mp3,.wav,.ogg,.m4p" required/>
+
+    <button type="submit">Thêm bài hát</button>
+    <a th:href="@{/songs}">Quay lại danh sách</a>
+</form>
+
+</body>
+</html>

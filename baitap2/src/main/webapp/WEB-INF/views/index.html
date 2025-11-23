@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NASA Picture of the Day</title>
+</head>
+<body>
+
+<h2>Bức ảnh của ngày</h2>
+
+<img id="img-of-the-day" width="900" th:src="@{/images/placeholder.png}">
+
+<script>
+    let query = 'https://api.nasa.gov/planetary/apod?api_key=TcNdvMDdx7o80XK2lckjKfN8ZSTRXNhtTti8eXMJ';
+
+    let request = new XMLHttpRequest();
+    request.open('GET', query);
+    request.onload = function () {
+        if (request.status === 200) {
+            let res = JSON.parse(request.responseText);
+            document.getElementById('img-of-the-day').src = res.url;
+        }
+    };
+    request.send();
+</script>
+
+<hr>
+
+<h3>Đánh giá</h3>
+
+<form th:action="@{/comment}" method="post">
+    <label>Rate:</label>
+    <input type="number" name="rate" min="1" max="5" required><br>
+
+    <label>Author:</label>
+    <input type="text" name="author" required><br>
+
+    <label>Feedback:</label><br>
+    <textarea name="feedback" cols="80" rows="5"></textarea><br>
+
+    <button type="submit">Comment</button>
+</form>
+
+<hr>
+
+<h3>Feedback hôm nay</h3>
+
+<!-- Thymeleaf loop -->
+<div th:if="${comments != null}">
+    <div th:each="c : ${comments}">
+        <p>
+            <b th:text="'+' + ${c.rate} + ' ' + ${c.feedback}"></b><br>
+            <span th:text="${c.likes} + ' likes'"></span>
+            <a th:href="@{/like/{id}(id=${c.id})}"><button>Like</button></a>
+        </p>
+        <hr>
+    </div>
+</div>
+
+</body>
+</html>

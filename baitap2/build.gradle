@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+ext {
+    junitVersion = '5.10.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << '-parameters'
+    }
+}
+
+dependencies {
+    implementation 'org.springframework:spring-webmvc:6.1.2'
+    implementation 'org.springframework:spring-context:6.1.2'
+    implementation 'org.springframework:spring-orm:6.1.2'
+
+    // Servlet API cho Tomcat 10
+    providedCompile 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+
+    // Hibernate
+    implementation 'org.hibernate.orm:hibernate-core:6.3.0.Final'
+
+
+    // MySQL Connector (bắt buộc để không báo đỏ driver_class)
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.30'
+
+    // JSTL
+    implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0'
+    implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1'
+
+    implementation group: 'org.thymeleaf', name: 'thymeleaf-spring6', version: '3.1.1.RELEASE'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+war {
+    archiveFileName = "${project.name}.war"
+}
+
+

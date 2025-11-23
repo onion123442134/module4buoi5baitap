@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nghe nhạc</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        audio {
+            margin-top: 20px;
+            width: 80%;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #f2b632;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #e0a920;
+        }
+    </style>
+</head>
+<body>
+<h1><span th:text="${song.title}">Tên bài hát</span> - <span th:text="${song.artist}">Nghệ sĩ</span></h1>
+<p>Thể loại: <span th:text="${song.genre}">Thể loại</span></p>
+
+<audio controls>
+    <source th:src="${song.filePath}" type="audio/mpeg"/>
+    Trình duyệt của bạn không hỗ trợ thẻ audio.
+</audio>
+
+<a th:href="@{/songs}">Quay lại danh sách</a>
+</body>
+</html>
