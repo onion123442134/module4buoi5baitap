@@ -27,7 +27,6 @@ public class CommentService implements ICommentService {
 
     @Override
     public void like(Long id) {
-        // call repository method that increments likes
         repo.like(id);
     }
 }

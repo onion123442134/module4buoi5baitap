@@ -34,19 +34,17 @@ public class AppConfiguration implements WebMvcConfigurer {
         return new JpaTransactionManager(emf);
     }
 
-    // Thymeleaf Template Resolver
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-        resolver.setPrefix("/WEB-INF/views/"); // Thư mục chứa HTML
-        resolver.setSuffix(".html");           // Đuôi file
+        resolver.setPrefix("/WEB-INF/views/");
+        resolver.setSuffix(".html");
         resolver.setTemplateMode(TemplateMode.HTML);
         resolver.setCharacterEncoding("UTF-8");
-        resolver.setCacheable(false);          // Cho dev, reload html ngay
+        resolver.setCacheable(false);
         return resolver;
     }
 
-    // Thymeleaf Template Engine
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine engine = new SpringTemplateEngine();
@@ -54,7 +52,6 @@ public class AppConfiguration implements WebMvcConfigurer {
         return engine;
     }
 
-    // Thymeleaf View Resolver
     @Bean
     public ThymeleafViewResolver viewResolver() {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
